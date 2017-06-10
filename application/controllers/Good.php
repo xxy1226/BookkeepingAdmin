@@ -16,6 +16,11 @@ class Good extends CI_Controller{
      */
     function index()
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $params['limit'] = RECORDS_PER_PAGE; 
         $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
         
@@ -35,6 +40,11 @@ class Good extends CI_Controller{
      */
     function add()
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('GoodName','GoodName','required|max_length[40]');
@@ -68,6 +78,11 @@ class Good extends CI_Controller{
      */
     function edit($GoodID)
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         // check if the good exists before trying to edit it
         $data['good'] = $this->Good_model->get_good($GoodID);
         
@@ -109,6 +124,11 @@ class Good extends CI_Controller{
      */
     function remove($GoodID)
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $good = $this->Good_model->get_good($GoodID);
 
         // check if the good exists before trying to delete it

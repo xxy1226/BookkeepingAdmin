@@ -16,6 +16,11 @@ class Bank extends CI_Controller{
      */
     function index()
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $data['banks'] = $this->Bank_model->get_all_banks();
         
         $data['_view'] = 'bank/index';
@@ -27,6 +32,11 @@ class Bank extends CI_Controller{
      */
     function add()
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('BankName','BankName','required|is_unique[banks.BankName]|max_length[40]');
@@ -52,6 +62,11 @@ class Bank extends CI_Controller{
      */
     function edit($BankID)
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         // check if the bank exists before trying to edit it
         $data['bank'] = $this->Bank_model->get_bank($BankID);
         
@@ -85,6 +100,11 @@ class Bank extends CI_Controller{
      */
     function remove($BankID)
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $bank = $this->Bank_model->get_bank($BankID);
 
         // check if the bank exists before trying to delete it

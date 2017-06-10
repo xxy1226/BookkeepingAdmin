@@ -16,6 +16,11 @@ class Card extends CI_Controller{
      */
     function index()
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $data['cards'] = $this->Card_model->get_all_cards();
         
         $data['_view'] = 'card/index';
@@ -27,6 +32,11 @@ class Card extends CI_Controller{
      */
     function add()
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('CardNum','CardNum','integer|max_length[19]|min_length[12]');
@@ -76,6 +86,11 @@ class Card extends CI_Controller{
      */
     function edit($CardID)
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         // check if the card exists before trying to edit it
         $data['card'] = $this->Card_model->get_card($CardID);
         
@@ -133,6 +148,11 @@ class Card extends CI_Controller{
      */
     function remove($CardID)
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $card = $this->Card_model->get_card($CardID);
 
         // check if the card exists before trying to delete it

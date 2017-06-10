@@ -16,6 +16,11 @@ class Card_type extends CI_Controller{
      */
     function index()
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $data['card_types'] = $this->Card_type_model->get_all_card_types();
         
         $data['_view'] = 'card_type/index';
@@ -27,6 +32,11 @@ class Card_type extends CI_Controller{
      */
     function add()
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('CardType','CardType','required|is_unique[card_type.CardType]|max_length[40]');
@@ -52,6 +62,11 @@ class Card_type extends CI_Controller{
      */
     function edit($CardTypeID)
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         // check if the card_type exists before trying to edit it
         $data['card_type'] = $this->Card_type_model->get_card_type($CardTypeID);
         
@@ -85,6 +100,11 @@ class Card_type extends CI_Controller{
      */
     function remove($CardTypeID)
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $card_type = $this->Card_type_model->get_card_type($CardTypeID);
 
         // check if the card_type exists before trying to delete it

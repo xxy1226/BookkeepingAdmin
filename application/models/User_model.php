@@ -53,4 +53,21 @@ class User_model extends CI_Model
     {
         return $this->db->delete('users',array('UserID'=>$UserID));
     }
+    
+    /*
+     * function to log user in
+     */
+    public function login($password) {
+        // Validate
+        $this->db->where('UserName', 'BookkeepingAdmin');
+        $this->db->where('Password', $password);
+        
+        $result = $this->db->get('users');
+        
+        if($result->num_rows() == 1) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 }

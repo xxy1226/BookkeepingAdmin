@@ -16,6 +16,11 @@ class Purchase extends CI_Controller{
      */
     function index()
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $params['limit'] = RECORDS_PER_PAGE; 
         $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
         
@@ -35,6 +40,11 @@ class Purchase extends CI_Controller{
      */
     function add()
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('GST','GST','decimal|max_length[8]');
@@ -77,6 +87,11 @@ class Purchase extends CI_Controller{
      */
     function edit($PurchaseID)
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         // check if the purchase exists before trying to edit it
         $data['purchase'] = $this->Purchase_model->get_purchase($PurchaseID);
         
@@ -127,6 +142,11 @@ class Purchase extends CI_Controller{
      */
     function remove($PurchaseID)
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $purchase = $this->Purchase_model->get_purchase($PurchaseID);
 
         // check if the purchase exists before trying to delete it

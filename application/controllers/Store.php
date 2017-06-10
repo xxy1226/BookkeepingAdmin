@@ -16,6 +16,11 @@ class Store extends CI_Controller{
      */
     function index()
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $data['stores'] = $this->Store_model->get_all_stores();
         
         $data['_view'] = 'store/index';
@@ -27,6 +32,11 @@ class Store extends CI_Controller{
      */
     function add()
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('StoreName','StoreName','required|max_length[40]');
@@ -60,6 +70,11 @@ class Store extends CI_Controller{
      */
     function edit($StoreID)
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         // check if the store exists before trying to edit it
         $data['store'] = $this->Store_model->get_store($StoreID);
         
@@ -101,6 +116,11 @@ class Store extends CI_Controller{
      */
     function remove($StoreID)
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $store = $this->Store_model->get_store($StoreID);
 
         // check if the store exists before trying to delete it

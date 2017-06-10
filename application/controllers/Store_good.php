@@ -16,6 +16,11 @@ class Store_good extends CI_Controller{
      */
     function index()
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $data['stores_goods'] = $this->Store_good_model->get_all_stores_goods();
         
         $data['_view'] = 'store_good/index';
@@ -27,6 +32,11 @@ class Store_good extends CI_Controller{
      */
     function add()
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         if(isset($_POST) && count($_POST) > 0)     
         {   
             $params = array(
@@ -47,6 +57,11 @@ class Store_good extends CI_Controller{
      */
     function edit($StoreID)
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         // check if the store_good exists before trying to edit it
         $data['store_good'] = $this->Store_good_model->get_store_good($StoreID);
         
@@ -75,6 +90,11 @@ class Store_good extends CI_Controller{
      */
     function remove($StoreID)
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $store_good = $this->Store_good_model->get_store_good($StoreID);
 
         // check if the store_good exists before trying to delete it

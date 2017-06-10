@@ -16,6 +16,11 @@ class Purchase_good extends CI_Controller{
      */
     function index()
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $data['purchases_goods'] = $this->Purchase_good_model->get_all_purchases_goods();
         
         $data['_view'] = 'purchase_good/index';
@@ -27,6 +32,11 @@ class Purchase_good extends CI_Controller{
      */
     function add()
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('OnSale','OnSale','required');
@@ -58,6 +68,11 @@ class Purchase_good extends CI_Controller{
      */
     function edit($PurchaseID)
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         // check if the purchase_good exists before trying to edit it
         $data['purchase_good'] = $this->Purchase_good_model->get_purchase_good($PurchaseID);
         
@@ -97,6 +112,11 @@ class Purchase_good extends CI_Controller{
      */
     function remove($PurchaseID)
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $purchase_good = $this->Purchase_good_model->get_purchase_good($PurchaseID);
 
         // check if the purchase_good exists before trying to delete it

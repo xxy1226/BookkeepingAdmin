@@ -16,10 +16,63 @@ class User extends CI_Controller{
      */
     function index()
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $data['users'] = $this->User_model->get_all_users();
         
         $data['_view'] = 'user/index';
         $this->load->view('layouts/main',$data);
+    }
+    
+    // Log in user
+    public function login() {
+        $data['_view'] = 'user/login';
+        
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        
+        if($this->form_validation->run() === FALSE) {
+            $this->load->view('layouts/main',$data);
+        } else {
+            // Get and encrypt the password
+            $password = $this->hash($this->input->post('password'));
+            
+            //Login user
+            $admin = $this->User_model->login($password);
+            
+            if ($admin) {
+                // Create session
+                $user_data = array(
+                    'adlog' => TRUE
+                );
+                
+                $this->session->set_userdata($user_data);
+
+                // Set message
+                $this->session->set_flashdata('user_loggedin', 'You are now logged in');
+                
+                redirect();
+            } else {
+                // Set message
+                $this->session->set_flashdata('login_failed', 'Login is invalid');
+
+                redirect('user/login');
+            }
+        }
+    }
+
+    /*
+     * Logging user out
+     */
+    public function logout() {
+        // Unset user data
+        $this->session->unset_userdata('adlog');
+        
+        $this->session->set_flashdata('user_loggedout', 'You are now logged out');                
+        
+        redirect();
     }
 
     /*
@@ -27,6 +80,11 @@ class User extends CI_Controller{
      */
     function add()
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('UserName','UserName','required|max_length[30]');
@@ -57,6 +115,11 @@ class User extends CI_Controller{
      */
     function edit($UserID)
     {   
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         // check if the user exists before trying to edit it
         $data['user'] = $this->User_model->get_user($UserID);
         
@@ -73,7 +136,7 @@ class User extends CI_Controller{
             {   
                 $params = array(
 					'ShowName' => $this->input->post('ShowName'),
-				'Password' => $this->hash($this->input->post('Password')),
+                                        'Password' => $this->hash($this->input->post('Password')),
 					'UserName' => $this->input->post('UserName'),
                 );
 
@@ -95,6 +158,11 @@ class User extends CI_Controller{
      */
     function remove($UserID)
     {
+        // Check login
+        if (!$this->session->userdata('adlog')) {
+            redirect('user/login');
+        }
+        
         $user = $this->User_model->get_user($UserID);
 
         // check if the user exists before trying to delete it

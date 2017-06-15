@@ -13,7 +13,7 @@
  */
 class Bank_m extends CI_Model {
 
-  public function get_bank($BankID = FALSE) {
+  public function get_banks($BankID = FALSE) {
     if ($BankID === FALSE) {
       $this->db->order_by('BankID');
       $query = $this->db->get('banks');
@@ -30,6 +30,5 @@ class Bank_m extends CI_Model {
         );
         $this->db->where('BankID', $this->input->post('bank_id'));
         return $this->db->update('banks', $data);
-  
   }
 }

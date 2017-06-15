@@ -8,7 +8,7 @@
 class Users extends CI_Controller {
 
   // 用户登录
-  public function login() {
+  public function login($uri = '') {
     $data['title'] = '登录';
     $data['username'] = FALSE;
 
@@ -40,9 +40,9 @@ class Users extends CI_Controller {
         $this->session->set_userdata($user_data);
 
         // Set message
-        $this->session->set_flashdata('user_loggedin', 'You are now logged in');
+        $this->session->set_flashdata('success_message', '登录成功');
 
-        redirect();
+        redirect(str_replace('-', '/', $uri));
       } else {
         // Set message
         $this->session->set_flashdata('login_failed', '用户名或密码错误，忘记用户名或密码<a href="mailto:andrew.xia.mb@gmail.com?Subject=忘记《记账本》用户名和密码">给管理员发邮件</a>');
@@ -65,7 +65,7 @@ class Users extends CI_Controller {
     $this->session->unset_userdata('showname');
     $this->session->unset_userdata('logged_in');
 
-    $this->session->set_flashdata('user_loggedout', 'You are now logged out');
+    $this->session->set_flashdata('alert_message', '退出成功');
 
     redirect();
   }

@@ -12,7 +12,7 @@
     <div class="form-group">
       <input type="password" name="password" class="form-control" placeholder="密码" required autofocus>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
+    <button type="submit" class="btn btn-primary btn-block">登录</button>
   </div>
 </div>
 <?php echo form_close(); ?>

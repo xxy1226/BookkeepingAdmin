@@ -15,4 +15,7 @@ class Home extends CI_Controller {
     $this->load->view('comps/footer');
   }
 
+  public function testall() {
+    $this->load->view('home/testall');
+  }
 }

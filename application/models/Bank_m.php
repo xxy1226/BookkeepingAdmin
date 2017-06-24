@@ -19,16 +19,20 @@ class Bank_m extends CI_Model {
       $query = $this->db->get('banks');
       return $query->result_array();
     }
-    
+
     $query = $this->db->get_where('banks', array('BankID' => $BankID));
     return $query->row_array();
   }
 
   public function update_bank() {
     $data = array(
-            'BankName' => $this->input->post('bank_name')
-        );
-        $this->db->where('BankID', $this->input->post('bank_id'));
-        return $this->db->update('banks', $data);
+        'BankName' => $this->input->post('bank_name')
+    );
+    $this->db->where('BankID', $this->input->post('bank_id'));
+    return $this->db->update('banks', $data);
+  }
+
+  public function amount_banks() {
+    return $this->db->get('banks')->num_rows();
   }
 }

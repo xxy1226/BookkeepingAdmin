@@ -9,6 +9,12 @@ class Users extends CI_Controller {
 
   // 用户登录
   public function login($uri = '') {
+    // 查看是否登录
+    if ($this->session->userdata('logged_in')) {
+      $this->session->set_flashdata('warning_message', '已登录');
+      redirect();
+    }
+
     $data['title'] = '登录';
     $data['username'] = FALSE;
 
@@ -68,6 +74,52 @@ class Users extends CI_Controller {
     $this->session->set_flashdata('alert_message', '退出成功');
 
     redirect();
+  }
+
+  // 用户列表
+  public function index() {
+    // 查看是否登录
+    if (!$this->session->userdata('logged_in')) {
+      $this->session->set_flashdata('warning_message', '请先登录');
+      redirect('users/login/users');
+    }
+
+    $data['users'] = $this->User_m->get_users();
+    $data['title'] = '管理-用户';
+
+    $this->load->view('comps/header', $data);
+    $this->load->view('users/index');
+    $this->load->view('comps/footer');
+  }
+
+  public function view($user_id = FALSE) {
+
+    $amount_users = $this->User_m->amount_users();
+
+    // 查看是否登录
+    if (!$this->session->userdata('logged_in')) {
+      $this->session->set_flashdata('warning_message', '请先登录');
+      redirect('users/login/users-view-' . $user_id);
+    }
+
+    if ($user_id === FALSE) {
+      $this->session->set_flashdata('warning_message', '未指定用户');
+      redirect('users');
+    }
+
+    if ($user_id < 3 || $user_id > $amount_users) {
+      $this->session->set_flashdata('warning_message', '用户不存在');
+      redirect('users');
+    }
+
+    $data['user'] = $this->User_m->get_users($user_id);
+
+    $data['title_icon'] = 'user.png';
+    $data['title'] = '管理-用户';
+
+    $this->load->view('comps/header', $data);
+    $this->load->view('users/view');
+    $this->load->view('comps/footer');
   }
 
   /*

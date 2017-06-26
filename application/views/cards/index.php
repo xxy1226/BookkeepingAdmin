@@ -6,9 +6,9 @@
       </div>
       <div class="col-md-2">
         <?php if ($page == 'cards'): ?>
-          <a class="btn btn-warning btn-sm" href="<?php echo site_url('cards/all_cards/'); ?>">所有银行卡</a>
+          <a class="btn btn-warning btn-xs" href="<?php echo site_url('cards/all_cards/'); ?>">查看所有银行卡</a>
         <?php elseif ($page == 'all_cards'): ?>
-          <a class="btn btn-warning btn-sm" href="<?php echo site_url('cards/'); ?>">我的银行卡</a>
+          <a class="btn btn-warning btn-xs" href="<?php echo site_url('cards/'); ?>">查看我的银行卡</a>
         <?php endif; ?>
       </div>
     </div>
@@ -35,11 +35,11 @@
           <?php else: ?>
             <td><?= $i ?></td>
           <?php endif; ?>
-            <td><a href="<?php echo site_url('banks/view/' . $card['BankID']); ?>"><?= $card['BankName'] ?></a></td>
+          <td><a title="查看银行详情" href="<?php echo site_url('banks/view/' . $card['BankID']); ?>"><?= $card['BankName'] ?></a></td>
           <td><?= $card['CardType'] ?></td>
-          <td><a href="<?php echo site_url('cards/view/' . $card['CardID']); ?>"><?= $card['CardNum'] ?></a></td>
+          <td><a title="查看此卡详情" href="<?php echo site_url('cards/view/' . $card['CardID']); ?>"><?= $card['CardNum'] ?></a></td>
           <td><?= $card['ShowName'] ?></td>
-          <td><?= $card['Description'] ?></td>
+          <td><?=$card['CardDescription']; ?></td>
           <td>
             <!--<a href="<?php echo site_url('cards/edit/' . $card['CardID']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> 修改</a>--> 
             <a href="<?php echo site_url('cards/view/' . $card['CardID']); ?>" class="btn btn-success btn-xs"><span class="fa fa-credit-card"></span> 查看详情</a> 

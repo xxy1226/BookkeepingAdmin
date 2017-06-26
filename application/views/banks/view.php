@@ -10,7 +10,7 @@
   </caption>
   <tr>
     <th>网址</th>
-    <td><a href="<?= $bank['BankWeb'] ?>"><?= $bank['BankName'] ?>&nbsp;网址</a></td>
+    <td><a title="<?= $bank['BankName'] ?> 网址" target="_blank" href="<?= $bank['BankWeb'] ?>"><?= $bank['BankWeb'] ?></a></td>
   </tr>
   <tr>
     <th>地址</th>

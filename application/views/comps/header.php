@@ -62,10 +62,10 @@
                 <li class="divider hidden"></li>
                 <li><a class="hidden" href="#">商品/服务</a></li>
                 <li class="hidden divider"></li>
-                <li><a href="<?php echo base_url(); ?>banks">银行</a></li>
-                <li><a href="<?php echo base_url(); ?>cards/">银行卡</a></li>
-                <li class="hidden divider"></li>
-                <li class="hidden"><a href="<?php echo base_url(); ?>users">用户</a></li>
+                <li><a href="<?php echo base_url(); ?>banks"><span class="fa fa-university"></span>&nbsp;&nbsp;银行</a></li>
+                <li><a href="<?php echo base_url(); ?>cards"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;银行卡</a></li>
+                <li class="divider"></li>
+                <li><a href="<?php echo base_url(); ?>users"><span class="fa fa-user"></span>&nbsp;&nbsp;用户</a></li>
               </ul>
             </li>
           </ul>

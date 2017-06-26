@@ -60,7 +60,7 @@ class Cards extends CI_Controller {
 
     // 去掉‘现金银行’
     if ($bank_id === '1' || $bank_id === FALSE) {
-      redirect('banks/');
+      redirect('banks');
     }
 
     $this->load->model('Bank_m');
@@ -71,6 +71,39 @@ class Cards extends CI_Controller {
     $data['page'] = 'all_cards';
 
     $data['cards'] = $this->Card_m->get_cards($bank_id);
+
+    $this->load->view('comps/header', $data);
+    $this->load->view('cards/index');
+    $this->load->view('comps/footer');
+  }
+  
+  public function user_cards($user_id = FALSE) {
+    // 查看是否登录
+    if (!$this->session->userdata('logged_in')) {
+      $this->session->set_flashdata('warning_message', '请先登录');
+      redirect('users/login/cards-user_cards-' . $user_id);
+    }
+
+    // 未指定用户
+    if ($user_id === FALSE) {
+      $this->session->set_flashdata('warning_message', '未指定用户');
+      redirect('users');
+    }
+
+    // 未指定用户
+    if ($user_id < 3 || $user_id === FALSE) {
+      $this->session->set_flashdata('warning_message', '用户不存在');
+      redirect('users');
+    }
+
+    $this->load->model('User_m');
+    $user = $this->User_m->get_users($user_id);
+
+    $data['title_icon'] = 'card.png';
+    $data['title'] = '管理—银行卡(' . $user['ShowName'] . ')';
+    $data['page'] = 'all_cards';
+
+    $data['cards'] = $this->Card_m->get_cards(NULL, $user_id);
 
     $this->load->view('comps/header', $data);
     $this->load->view('cards/index');

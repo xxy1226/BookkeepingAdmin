@@ -74,4 +74,4 @@
   </tr>
 </table>
 
-<div class="container text-center"><a class="btn btn-primary" href="<?= base_url('cards') ?>">返回银行卡首页</a></div>
+<div class="container text-center"><a class="btn btn-primary" href="<?= base_url('users') ?>">返回用户首页</a></div>

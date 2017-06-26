@@ -18,8 +18,10 @@
           <td><?= $user['Phone']?></td>
           <td><a href="mailto:<?= $user['Email1']?>"><?= $user['Email1']?></a></td>
           <td>
-            <a href="<?php echo site_url('users/view/' . $user['UserID']); ?>" class="btn btn-success btn-xs"><span class="fa fa-user-o"></span>&nbsp;&nbsp;详情</a> 
-            <a href="<?php echo site_url('users/edit/' . $user['UserID']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> 修改</a> 
+            <a href="<?php echo site_url('users/view/' . $user['UserID']); ?>" class="btn btn-info btn-xs"><span class="fa fa-user-o"></span>&nbsp;&nbsp;详情</a> 
+            《？php
+            <a href="<?php echo site_url('users/edit/' . $user['UserID']); ?>" class="btn btn-success btn-xs"><span class="fa fa-pencil"></span> 修改</a> 
+            
             <a href="<?php echo site_url('cards/user_cards/' . $user['UserID']); ?>" class="btn btn-warning btn-xs"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;查看卡</a> 
           </td>
         </tr>

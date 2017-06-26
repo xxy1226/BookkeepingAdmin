@@ -22,10 +22,6 @@
       $(document).ready(function () {
         $("#header_message").delay(1000).fadeOut('slow');
       });
-
-      $("button").click(function () {
-        $(".about-app").css("display", "block");
-      });
     </script>
     <!--导航栏-->
     <nav class="navbar navbar-default navbar-static-top">
@@ -33,7 +29,7 @@
         <!--大标题-->
         <div class="navbar-header">
           <a class="navbar-brand" href="<?php echo base_url(); ?>">记账本</a>
-          <button id="about-app" class="btn btn-primary btn-xs"><img alt="?" src="<?php echo base_url('/assets/img/icon/question.png'); ?>"></button>
+          <a href="#model-about" data-toggle="modal" class="btn btn-primary btn-xs"><img alt="?" src="<?php echo base_url('/assets/img/icon/question.png'); ?>"></a>
           <button class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navHeaderCollapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -79,23 +75,6 @@
         </div>
       </div>
     </nav>
-
-    <!-- *** -->
-    <!--关于1-->
-    <!-- Modal content-->
-    <div class="about-app modal-content" style="display: none;">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">关于</h4>
-      </div>
-      <div class="modal-body">
-        <p>APP尚未完成，当前版本0.622，敬请期待完整功能。</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-    <!-- *** -->
 
     <div class="container">
       <!-- Flash message -->

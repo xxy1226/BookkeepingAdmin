@@ -42,11 +42,7 @@ class Banks extends CI_Controller {
     // 查看是否登录
     if (!$this->session->userdata('logged_in')) {
       $this->session->set_flashdata('warning_message', '请先登录');
-      if (!$bank_id) {
-        redirect('users/login/banks');
-      } else {
-        redirect('users/login/banks-edit-' . $bank_id);
-      }
+      redirect('users/login/banks-edit-' . $bank_id);
     }
 
     // 没有指定银行

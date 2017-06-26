@@ -15,7 +15,7 @@
           <td><a href="<?php echo site_url('banks/view/' . $bank['BankID']); ?>"><?= $bank['BankName'] ?></a></td>
           <td>
             <!--<a href="<?php echo site_url('banks/edit/' . $bank['BankID']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> 修改</a>--> 
-            <a href="<?php echo site_url('banks/view/' . $bank['BankID']); ?>" class="btn btn-success btn-xs"><span class="fa fa-university"></span>&nbsp;&nbsp;银行详情</a> 
+            <a href="<?php echo site_url('banks/view/' . $bank['BankID']); ?>" class="btn btn-info btn-xs"><span class="fa fa-university"></span>&nbsp;&nbsp;银行详情</a> 
             <a href="<?php echo site_url('cards/bank_cards/' . $bank['BankID']); ?>" class="btn btn-success btn-xs"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;查看卡</a> 
           </td>
         </tr>
